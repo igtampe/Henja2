@@ -1,19 +1,41 @@
 ﻿Public Class HFEditor
     Implements IHenjaEditorMode
 
+    Private myColorSelector As HiColorPicker
+    Private SelectedColor As String
+
     Public Sub New()
+        myColorSelector = New HiColorPicker
+        SelectedColor = "000"
+
 
     End Sub
 
-    Public Sub KeyInput(CurrentKey As ConsoleKeyInfo) Implements IHenjaEditorMode.KeyPress
+    Public Sub KeyInput(Key As ConsoleKeyInfo) Implements IHenjaEditorMode.KeyPress
 
+        If Key.Key = ConsoleKey.C Then
 
+            Dim NewColorString As String = myColorSelector.PickColor
+            If Not IsNothing(NewColorString) Then SelectedColor = NewColorString
+
+            Render()
+
+        ElseIf Key.Key = ConsoleKey.Spacebar Then
+            Dim currentLine() As String = Currentdocument(CurrentY).Split("-")
+            currentLine(CurrentX) = SelectedColor
+            Currentdocument(CurrentY) = String.Join("-", currentLine)
+
+            HiColorDraw(SelectedColor)
+
+        End If
 
     End Sub
 
 
     Public Sub Render() Implements IHenjaEditorMode.Render
         Dim X As Integer = 1
+
+        Sprite("CTRL+S to save, Draw with Spacebar, choose color with C.", ConsoleColor.Black, ConsoleColor.White, 0, 0)
 
         For Each Line As String In Currentdocument
             SetPos(0, X)

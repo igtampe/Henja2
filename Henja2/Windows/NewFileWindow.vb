@@ -77,6 +77,7 @@
                     End If
 
                 Case "OKBTN"
+                    If Key.Key = ConsoleKey.UpArrow Then SelectedElement = "YBOX"
                     If Key.Key = ConsoleKey.RightArrow Then SelectedElement = "CANCELBTN"
                     If Key.Key = ConsoleKey.Enter Then
                         Clear()
@@ -84,6 +85,7 @@
                     End If
 
                 Case "CANCELBTN"
+                    If Key.Key = ConsoleKey.UpArrow Then SelectedElement = "YBOX"
                     If Key.Key = ConsoleKey.LeftArrow Then SelectedElement = "OKBTN"
                     If Key.Key = ConsoleKey.Enter Then
                         Clear()
